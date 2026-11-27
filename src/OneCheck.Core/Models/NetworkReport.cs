@@ -62,6 +62,15 @@ public sealed record AdapterInfo(
     public bool IsApipa => IPv4 is not null && IPv4.StartsWith("169.254.", StringComparison.Ordinal);
 
     public bool HasGateway => !string.IsNullOrEmpty(Gateway);
+
+    /// <summary>IPv4 lain di adapter ini selain IP utama (format "ip/prefix").</summary>
+    public IReadOnlyList<string> OtherIPv4 { get; init; } = [];
+
+    /// <summary>Gateway tidak berada di subnet IP utama (konfigurasi tidak wajar, info untuk teknisi).</summary>
+    public bool GatewayOutsideSubnet
+        => IPv4 is not null && PrefixLength is { } p && Gateway is not null
+           && System.Net.IPAddress.TryParse(IPv4, out var ip) && System.Net.IPAddress.TryParse(Gateway, out var gw)
+           && !Checks.AdapterCheck.IsInSubnet(ip, p, gw);
 }
 
 public sealed record WifiInfo(

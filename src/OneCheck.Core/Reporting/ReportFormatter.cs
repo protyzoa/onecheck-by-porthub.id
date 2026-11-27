@@ -50,8 +50,11 @@ public static class ReportFormatter
             }
             lines.Add((T("sum.ipdns"), (a.IPv4 is null ? "-" : $"{a.IPv4}/{a.PrefixLength} ({(a.DhcpEnabled ? "DHCP" : T("val.manual"))})")
                                        + (a.IsApipa ? " ⚠ APIPA" : "")
+                                       + (a.OtherIPv4.Count > 0 ? " " + T("val.more_ips", a.OtherIPv4.Count) : "")
                                        + $" · DNS {(a.DnsServers.Count == 0 ? "-" : string.Join(", ", a.DnsServers.Take(2)))}"));
-            lines.Add((T("sum.gateway"), (a.Gateway ?? "-") + (r.PingGateway is { } g ? $" · {PingShort(g, lang)}" : "")));
+            lines.Add((T("sum.gateway"), (a.Gateway ?? "-")
+                                         + (a.GatewayOutsideSubnet ? " " + T("val.gw_outside") : "")
+                                         + (r.PingGateway is { } g ? $" · {PingShort(g, lang)}" : "")));
         }
 
         if (r.PingPublic.Count > 0)
@@ -94,7 +97,8 @@ public static class ReportFormatter
             sb.AppendLine($"PC {s.ComputerName} up {UptimeTiny(s.Uptime)}");
         if (r.PrimaryAdapter is { } a)
             sb.AppendLine($"{(a.Kind == AdapterKind.Wifi ? "WIFI" : a.Kind == AdapterKind.Ethernet ? "LAN" : "NIC")} {a.IPv4}/{a.PrefixLength}"
-                          + $" gw {a.Gateway ?? "-"} dns {string.Join(",", a.DnsServers.Take(2))}");
+                          + (a.OtherIPv4.Count > 0 ? $" +{a.OtherIPv4.Count}ip" : "")
+                          + $" gw {a.Gateway ?? "-"}{(a.GatewayOutsideSubnet ? "!" : "")} dns {string.Join(",", a.DnsServers.Take(2))}");
         else
             sb.AppendLine("NIC none");
         if (r.Wifi is { } w)
@@ -157,7 +161,10 @@ public static class ReportFormatter
             sb.AppendLine($"  IPv4 {a.IPv4 ?? "-"}/{a.PrefixLength} "
                           + (a.DhcpEnabled ? T("rep.dhcp_from", a.DhcpServer ?? "?") : $"({T("val.manual")})")
                           + (a.IsApipa ? " APIPA!" : ""));
-            sb.AppendLine($"  Gateway {a.Gateway ?? "-"} | DNS {(a.DnsServers.Count == 0 ? "-" : string.Join(", ", a.DnsServers))}");
+            if (a.OtherIPv4.Count > 0)
+                sb.AppendLine($"  {T("rep.other_ips")}: {string.Join(", ", a.OtherIPv4)}");
+            sb.AppendLine($"  Gateway {a.Gateway ?? "-"}{(a.GatewayOutsideSubnet ? " " + T("val.gw_outside") : "")}"
+                          + $" | DNS {(a.DnsServers.Count == 0 ? "-" : string.Join(", ", a.DnsServers))}");
         }
 
         if (r.PingGateway is { } g)

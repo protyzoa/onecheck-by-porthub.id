@@ -127,7 +127,7 @@ Pemeriksaan disusun **berlapis** (dari yang paling dekat ke komputer hingga ke i
 
 | # | Pemeriksaan | Setara perintah | Data yang diambil |
 |---|---|---|---|
-| C1 | **Info adapter jaringan** | `ipconfig /all` | Nama adapter, jenis (WiFi/LAN), status (Up/Down), MAC, IPv4, subnet mask, default gateway, DNS server, DHCP aktif/tidak, DHCP server, lease time, IPv6 (ringkas) |
+| C1 | **Info adapter jaringan** | `ipconfig /all` | Nama adapter, jenis (WiFi/LAN), status (Up/Down), MAC, IPv4, subnet mask, default gateway, DNS server, DHCP aktif/tidak, DHCP server, lease time, IPv6 (ringkas). **Adapter & IP utama = yang benar-benar dipakai Windows untuk keluar ke internet** (alamat sumber dari route ke 8.8.8.8), bukan sekadar adapter/IP pertama — penting untuk PC dengan banyak interface virtual atau satu adapter dengan beberapa IP. IP lain di adapter yang sama ditampilkan sebagai "+N IP lain"; gateway di luar subnet IP utama diberi tanda ⚠. |
 | C2 | **Ping ke gateway (router)** | `ping <gateway> -n 10` | Terkirim/diterima, packet loss %, latency min/avg/max, jitter |
 | C3 | **Ping ke internet (IP)** | `ping 8.8.8.8` & `ping 1.1.1.1` | Sama dengan C2 |
 | C4 | **Ping ke internet (nama domain)** | `ping google.com` | Sama dengan C2 + apakah nama berhasil di-resolve |
