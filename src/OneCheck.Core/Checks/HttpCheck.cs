@@ -11,7 +11,7 @@ namespace OneCheck.Core.Checks;
 /// </summary>
 public static class HttpCheck
 {
-    public const string UserAgent = "OneCheck/0.2";
+    public const string UserAgent = "OneCheck/1.0.1";
     private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(5);
 
     public static HttpClient CreateClient(bool followRedirects)

@@ -2,13 +2,13 @@
 
 Aplikasi desktop Windows untuk cek jaringan dengan satu klik, untuk pengguna awam. Spesifikasi lengkap ada di [SPEC.md](SPEC.md).
 
-Status: **v1.0.0** — M1 & M2 selesai, M3 sebagian (ikon, branding, skrip rilis siap; menunggu sertifikat code signing dan uji multi-PC).
+Status: **v1.0.1** — M1 & M2 selesai, M3 sebagian (ikon, branding, skrip rilis siap; menunggu sertifikat code signing dan uji multi-PC).
 
 ## Download
 
 **[⬇ Download OneCheck.exe (versi terbaru)](https://github.com/protyzoa/onecheck-by-porthub.id/releases/latest/download/OneCheck.exe)** — satu file portable (±62 MB), tanpa install, tanpa admin. Windows 10 (1809+) / 11, 64-bit.
 
-- Paket zip (exe + contoh `onecheck.sample.json` untuk teknisi): [OneCheck-1.0.0.zip](https://github.com/protyzoa/onecheck-by-porthub.id/releases/download/v1.0.0/OneCheck-1.0.0.zip)
+- Paket zip (exe + contoh `onecheck.sample.json` untuk teknisi): [OneCheck-1.0.1.zip](https://github.com/protyzoa/onecheck-by-porthub.id/releases/download/v1.0.1/OneCheck-1.0.1.zip)
 - Semua versi & catatan rilis: [halaman Releases](https://github.com/protyzoa/onecheck-by-porthub.id/releases)
 
 > ⚠️ Exe belum ditandatangani (code signing), jadi Windows SmartScreen bisa menampilkan *"Windows protected your PC"*. Klik **More info → Run anyway** untuk menjalankan.
