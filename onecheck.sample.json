@@ -1,0 +1,51 @@
+// Contoh konfigurasi OneCheck.
+// Ganti nama file ini menjadi "onecheck.json" dan letakkan di folder yang sama dengan OneCheck.exe.
+// Semua bagian opsional; yang tidak diisi memakai nilai bawaan.
+{
+  "branding": {
+    // Tampil di header: "OneCheck by <companyName>".
+    "companyName": "PortHub",
+    // Logo klien untuk layar awal (PNG/JPG, letakkan di folder yang sama dengan OneCheck.exe). Kosong = logo OneCheck.
+    "logoPath": "",
+    // Nomor WhatsApp teknisi (format 62xxx, tanpa +). Kosong = tombol "Kirim ke Teknisi" nonaktif.
+    "supportPhone": "",
+    // Kosong = teks bawaan sesuai bahasa. Jika diisi, dipakai untuk Indonesia & English.
+    "supportText": ""
+  },
+  "targets": {
+    "pingPublic": [ "8.8.8.8", "1.1.1.1" ],
+    "dnsTestDomain": "google.com",
+    "dnsPublicServer": "8.8.8.8",
+    "traceTarget": "8.8.8.8",
+    "httpCheckUrl": "http://www.msftconnecttest.com/connecttest.txt",
+    "httpCheckExpectedBody": "Microsoft Connect Test",
+    "httpsCheckUrls": [ "https://www.google.com/generate_204", "https://cp.cloudflare.com/generate_204" ],
+    "captivePortalOpenUrl": "http://www.msftconnecttest.com/redirect",
+    // Layanan IP publik & ISP, dicoba berurutan. ipinfo.io gratis ±50.000 request/bulan.
+    "publicIpUrls": [ "https://ipinfo.io/json", "http://ip-api.com/json", "https://api.ipify.org" ],
+    "ntpServers": [ "time.windows.com", "pool.ntp.org" ]
+  },
+  // Mode Teknisi dibuka dengan Ctrl+Shift+T. PIN kosong = tanpa PIN.
+  "technicianMode": { "enabled": true, "pin": "" },
+  // Maksimal 10 target. "critical": true = jika gagal, jadi kesimpulan utama.
+  // "tcpPort" = juga cek port TCP (berguna bila server memblokir ping).
+  "customTargets": [
+    // { "name": "Server Kasir",  "host": "10.0.0.10", "critical": true },
+    // { "name": "Portal Kantor", "host": "app.contoh.id", "tcpPort": 443, "maxLatencyMs": 100 },
+    // { "name": "Printer Lt.2",  "host": "192.168.1.50", "count": 4 }
+  ],
+  "thresholds": {
+    "wifiSignalDbm": { "excellent": -50, "good": -60, "fair": -70, "weak": -80 },
+    "wifiLowRateMbps": 20,
+    "highLatencyMs": 150,
+    "packetLossWarnPercent": 5,
+    "packetLossMajorPercent": 30,
+    "gatewayLossMajorPercent": 20,
+    "clockSkewWarnMinutes": 5
+  },
+  // Bahasa awal: "id", "en", atau "auto" (ikut bahasa Windows). User bisa ganti di aplikasi (ID | EN).
+  "language": "id",
+  "pingCount": 10,
+  "pingTimeoutMs": 1000,
+  "traceMaxHops": 15
+}

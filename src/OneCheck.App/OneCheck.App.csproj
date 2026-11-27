@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>OneCheck</AssemblyName>
+    <RootNamespace>OneCheck.App</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\onecheck.ico</ApplicationIcon>
+    <!-- Metadata yang tampil di Properties → Details file .exe dan di dialog SmartScreen/UAC -->
+    <Product>OneCheck by PortHub</Product>
+    <AssemblyTitle>OneCheck by PortHub</AssemblyTitle>
+    <Description>OneCheck - cek jaringan satu klik</Description>
+    <Company>PortHub</Company>
+    <Copyright>© 2026 PortHub</Copyright>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\onecheck.ico" />
+    <Resource Include="Assets\logo-full.png" />
+    <Resource Include="Assets\logo-shield.png" />
+  </ItemGroup>
+
+  <!-- dotnet publish -c Release  → satu file OneCheck.exe portable, tanpa perlu install runtime -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>none</DebugType>
+    <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneCheck.Core\OneCheck.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\onecheck.sample.json" Link="onecheck.sample.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.9.0" />
+  </ItemGroup>
+
+</Project>

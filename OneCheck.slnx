@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/OneCheck.App/OneCheck.App.csproj" />
+    <Project Path="src/OneCheck.Core/OneCheck.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OneCheck.Tests/OneCheck.Tests.csproj" />
+  </Folder>
+</Solution>
